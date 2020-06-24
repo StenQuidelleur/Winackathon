@@ -40,6 +40,11 @@ class User implements UserInterface
      * @ORM\ManyToOne(targetEntity=Prescription::class, inversedBy="users")
      */
     private $prescription;
+  
+    public function __toString()
+    {
+        return (string) $this->getEmail();
+    }
 
     public function getId(): ?int
     {
