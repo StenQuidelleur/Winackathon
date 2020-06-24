@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PharmacyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,12 +37,17 @@ class Pharmacy
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Horaire;
+    private $horaire;
 
     /**
-     * @ORM\ManyToOne(targetEntity=PharmMedic::class, inversedBy="pharmacy")
+     * @ORM\OneToMany(targetEntity=PharmMedic::class, mappedBy="pharmacy")
      */
-    private $pharmMedic;
+    private $pharmMedics;
+
+    public function __construct()
+    {
+        $this->pharmMedics = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,24 +92,43 @@ class Pharmacy
 
     public function getHoraire(): ?string
     {
-        return $this->Horaire;
+        return $this->horaire;
     }
 
-    public function setHoraire(?string $Horaire): self
+    public function setHoraire(?string $horaire): self
     {
-        $this->Horaire = $Horaire;
+        $this->horaire = $horaire;
 
         return $this;
     }
 
-    public function getPharmMedic(): ?PharmMedic
+    /**
+     * @return Collection|PharmMedic[]
+     */
+    public function getPharmMedics(): Collection
     {
-        return $this->pharmMedic;
+        return $this->pharmMedics;
     }
 
-    public function setPharmMedic(?PharmMedic $pharmMedic): self
+    public function addPharmMedic(PharmMedic $pharmMedic): self
     {
-        $this->pharmMedic = $pharmMedic;
+        if (!$this->pharmMedics->contains($pharmMedic)) {
+            $this->pharmMedics[] = $pharmMedic;
+            $pharmMedic->setPharmacy($this);
+        }
+
+        return $this;
+    }
+
+    public function removePharmMedic(PharmMedic $pharmMedic): self
+    {
+        if ($this->pharmMedics->contains($pharmMedic)) {
+            $this->pharmMedics->removeElement($pharmMedic);
+            // set the owning side to null (unless already changed)
+            if ($pharmMedic->getPharmacy() === $this) {
+                $pharmMedic->setPharmacy(null);
+            }
+        }
 
         return $this;
     }

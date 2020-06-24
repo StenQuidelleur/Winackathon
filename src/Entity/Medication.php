@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MedicationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,14 +30,20 @@ class Medication
     private $number;
 
     /**
-     * @ORM\ManyToOne(targetEntity=PresMedic::class, inversedBy="Medication")
+     * @ORM\OneToMany(targetEntity=PharmMedic::class, mappedBy="medication")
      */
-    private $presMedic;
+    private $pharmMedics;
 
     /**
-     * @ORM\ManyToOne(targetEntity=PharmMedic::class, inversedBy="medication")
+     * @ORM\OneToMany(targetEntity=PresMedic::class, mappedBy="medication")
      */
-    private $pharmMedic;
+    private $presMedics;
+
+    public function __construct()
+    {
+        $this->pharmMedics = new ArrayCollection();
+        $this->presMedics = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -66,26 +74,64 @@ class Medication
         return $this;
     }
 
-    public function getPresMedic(): ?PresMedic
+    /**
+     * @return Collection|PharmMedic[]
+     */
+    public function getPharmMedics(): Collection
     {
-        return $this->presMedic;
+        return $this->pharmMedics;
     }
 
-    public function setPresMedic(?PresMedic $presMedic): self
+    public function addPharmMedic(PharmMedic $pharmMedic): self
     {
-        $this->presMedic = $presMedic;
+        if (!$this->pharmMedics->contains($pharmMedic)) {
+            $this->pharmMedics[] = $pharmMedic;
+            $pharmMedic->setMedication($this);
+        }
 
         return $this;
     }
 
-    public function getPharmMedic(): ?PharmMedic
+    public function removePharmMedic(PharmMedic $pharmMedic): self
     {
-        return $this->pharmMedic;
+        if ($this->pharmMedics->contains($pharmMedic)) {
+            $this->pharmMedics->removeElement($pharmMedic);
+            // set the owning side to null (unless already changed)
+            if ($pharmMedic->getMedication() === $this) {
+                $pharmMedic->setMedication(null);
+            }
+        }
+
+        return $this;
     }
 
-    public function setPharmMedic(?PharmMedic $pharmMedic): self
+    /**
+     * @return Collection|PresMedic[]
+     */
+    public function getPresMedics(): Collection
     {
-        $this->pharmMedic = $pharmMedic;
+        return $this->presMedics;
+    }
+
+    public function addPresMedic(PresMedic $presMedic): self
+    {
+        if (!$this->presMedics->contains($presMedic)) {
+            $this->presMedics[] = $presMedic;
+            $presMedic->setMedication($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresMedic(PresMedic $presMedic): self
+    {
+        if ($this->presMedics->contains($presMedic)) {
+            $this->presMedics->removeElement($presMedic);
+            // set the owning side to null (unless already changed)
+            if ($presMedic->getMedication() === $this) {
+                $presMedic->setMedication(null);
+            }
+        }
 
         return $this;
     }

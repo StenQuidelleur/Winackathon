@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PrescriptionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,7 +32,7 @@ class Prescription
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $QRcode;
+    private $qrcode;
 
     /**
      * @ORM\Column(type="boolean")
@@ -38,9 +40,14 @@ class Prescription
     private $is_archived;
 
     /**
-     * @ORM\ManyToOne(targetEntity=PresMedic::class, inversedBy="prescription")
+     * @ORM\OneToMany(targetEntity=PresMedic::class, mappedBy="prescription")
      */
-    private $presMedic;
+    private $presMedics;
+
+    public function __construct()
+    {
+        $this->presMedics = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -71,14 +78,14 @@ class Prescription
         return $this;
     }
 
-    public function getQRcode(): ?string
+    public function getQrcode(): ?string
     {
-        return $this->QRcode;
+        return $this->qrcode;
     }
 
-    public function setQRcode(?string $QRcode): self
+    public function setQRcode(?string $qrcode): self
     {
-        $this->QRcode = $QRcode;
+        $this->qrcode = $qrcode;
 
         return $this;
     }
@@ -95,14 +102,33 @@ class Prescription
         return $this;
     }
 
-    public function getPresMedic(): ?PresMedic
+    /**
+     * @return Collection|PresMedic[]
+     */
+    public function getPresMedics(): Collection
     {
-        return $this->presMedic;
+        return $this->presMedics;
     }
 
-    public function setPresMedic(?PresMedic $presMedic): self
+    public function addPresMedic(PresMedic $presMedic): self
     {
-        $this->presMedic = $presMedic;
+        if (!$this->presMedics->contains($presMedic)) {
+            $this->presMedics[] = $presMedic;
+            $presMedic->setPrescription($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresMedic(PresMedic $presMedic): self
+    {
+        if ($this->presMedics->contains($presMedic)) {
+            $this->presMedics->removeElement($presMedic);
+            // set the owning side to null (unless already changed)
+            if ($presMedic->getPrescription() === $this) {
+                $presMedic->setPrescription(null);
+            }
+        }
 
         return $this;
     }
