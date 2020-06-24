@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="navbar-brand" href="{{ path('home_index') }}">GoPharma</a>
+        </li>
+    </ul>
+    {% if app.user %}
+        <a class="nav-link right" href="{{ path('app_logout') }}"> Se déconnecter</a>
+    {% else %}
+        <a class="nav-link right" href="{{ path('app_login') }}"> Se connecter</a>
+    {% endif %}
+</nav>
