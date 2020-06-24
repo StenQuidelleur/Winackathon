@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pharmacie a proximité{% endblock %}
+
+{% block body %}
+
+    <h1 class="title">Pharmacies a proximité</h1>
+
+    <div class="example-wrapper">
+
+    {% for pharmacy in pharmacy %}
+    <ul>
+        <li><strong>{{ pharmacy.name }} {{ pharmacy.address }} {{ pharmacy.horaire }}</strong></li>
+    {% for medic in medication %}
+        <div id="list-example" class="list-group">
+            <a class="list-group-item list-group-item-action" href="#list-item-1">{{ medic.name }}/ stock {{ medic.number }}</a>
+        </div>
+    {% endfor %}
+    </ul>
+</div>
+    {% endfor %}
+{% endblock %}
