@@ -44,6 +44,11 @@ class Pharmacy
      */
     private $pharmMedics;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $medications;
+
     public function __construct()
     {
         $this->pharmMedics = new ArrayCollection();
@@ -129,6 +134,18 @@ class Pharmacy
                 $pharmMedic->setPharmacy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMedications(): ?string
+    {
+        return $this->medications;
+    }
+
+    public function setMedications(?string $medications): self
+    {
+        $this->medications = $medications;
 
         return $this;
     }

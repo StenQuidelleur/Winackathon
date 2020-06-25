@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pharmacie a proximité{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Choose your Pharmacy</h1>
+        <div class="row justify-content-center mt-5">
+            <img class="img-fluid" src="https://i.postimg.cc/05npYZ56/Capture-d-e-cran-2020-06-25-a-11-40-42.png"  alt="">
+        </div>
+        <div class="row mb-5">
+        {% for pharmacy in pharmacy %}
+            <div class="card mt-3 col-sm-12 col-md-4 col-lg-4 ">
+                <div class="card-body">
+                    <h5 class="card-title">{{ pharmacy.name }}</h5>
+                    <p class="card-text">{{ pharmacy.address }}</p>
+                    <p class="card-text">{{ pharmacy.horaire }}</p>
+                    <p class="card-text">{{ pharmacy.medications |nl2br }}</p>
+                    <a href="{{ path('direction') }}" class="btn btn-primary">GoPharma</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
