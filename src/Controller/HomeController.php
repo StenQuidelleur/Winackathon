@@ -25,4 +25,13 @@ class HomeController extends AbstractController
     {
         return $this->render('home/agenda.html.twig');
     }
+  
+    /**
+     * @Route("/drone", name="drone")
+     */
+    public function drone()
+    {
+        return $this->render('drone/drone.html.twig');
+    }
+
 }

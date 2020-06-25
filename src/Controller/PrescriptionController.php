@@ -27,6 +27,8 @@ class PrescriptionController extends AbstractController
 
     /**
      * @Route("/new", name="prescription_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -38,8 +40,9 @@ class PrescriptionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($prescription);
             $entityManager->flush();
+            $this->addFlash('success', 'The prescription is sent ! ');
 
-            return $this->redirectToRoute('prescription_index');
+            return $this->redirectToRoute('prescription_new');
         }
 
         return $this->render('prescription/new.html.twig', [

@@ -37,7 +37,7 @@ class Prescription
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_archived;
+    private $is_archived = false;
 
     /**
      * @ORM\OneToMany(targetEntity=PresMedic::class, mappedBy="prescription")

@@ -1,12 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary nav-blue">
+<nav class="navbar navbar-expand-lg d-flex justify-content-center navbar-dark bg-primary">
+    {% if app.user %}
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="navbar-brand" href="{{ path('home_index') }}">GoPharma</a>
+            <a class="navbar-brand logo ml-3" href="{{ path('prescription_index') }}">Go-Pharma</a>
         </li>
     </ul>
-    {% if app.user %}
-        <a class="btn btn-danger right" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+    <a class="btn btn-sm btn-danger right mr-3" href="{{ path('app_logout') }}"><i class="fas fa-sm fa-sign-out-alt"></i></a>
     {% else %}
-        <a class="btn btn-success right" href="{{ path('app_login') }}">Sign in</a>
+    <a class="navbar-brand logo ml-3" href="{{ path('prescription_index') }}">Go-Pharma</a>
     {% endif %}
 </nav>
