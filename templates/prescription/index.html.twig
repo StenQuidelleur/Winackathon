@@ -3,39 +3,34 @@
 {% block title %}Prescription index{% endblock %}
 
 {% block body %}
-    <h1>Prescription index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Created_at</th>
-                <th>Qrcode</th>
-                <th>Is_archived</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for prescription in prescriptions %}
-            <tr>
-                <td>{{ prescription.id }}</td>
-                <td>{{ prescription.name }}</td>
-                <td>{{ prescription.createdAt ? prescription.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ prescription.qrcode }}</td>
-                <td>{{ prescription.isArchived ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('prescription_show', {'id': prescription.id}) }}">show</a>
-                    <a href="{{ path('prescription_edit', {'id': prescription.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('prescription_new') }}">Create new</a>
+<div class="container">
+    <h1>Prescription</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Created_at</th>
+                    <th>Qrcode</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for prescription in prescriptions %}
+                <tr>
+                    <td>{{ prescription.name }}</td>
+                    <td>{{ prescription.createdAt ? prescription.createdAt|date('Y-m-d') : '' }}</td>
+                    <td>{{ prescription.qrcode }}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary"><a href="{{ path('prescription_show', {'id': prescription.id}) }}">SHOW</a></button>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
