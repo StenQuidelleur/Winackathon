@@ -16,4 +16,13 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    /**
+     * @Route("/drone", name="drone")
+     */
+    public function drone()
+    {
+        return $this->render('drone/drone.html.twig');
+    }
+
 }
