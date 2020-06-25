@@ -2,26 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Prescription;
+use App\Entity\Medication;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PrescriptionType extends AbstractType
+class MedicationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
-            ->add('medications')
-            //->add('qrcode')
+            ->add('number')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Prescription::class,
+            'data_class' => Medication::class,
         ]);
     }
 }
