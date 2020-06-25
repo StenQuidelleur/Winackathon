@@ -55,6 +55,21 @@ class Prescription
      */
     private $medications;
 
+    /**
+     * @ORM\Column(type="string", length=80)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=80)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $security_Social_Number;
+
     public function __construct()
     {
         $this->created_at = new \DateTime('now');
@@ -95,7 +110,7 @@ class Prescription
         return $this->qrcode;
     }
 
-    public function setQRcode(?string $qrcode): self
+    public function setQrcode(?string $qrcode): self
     {
         $this->qrcode = $qrcode;
 
@@ -165,6 +180,42 @@ class Prescription
     public function setMedications(string $medications): self
     {
         $this->medications = $medications;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getSecuritySocialNumber(): ?int
+    {
+        return $this->security_Social_Number;
+    }
+
+    public function setSecuritySocialNumber(int $security_Social_Number): self
+    {
+        $this->security_Social_Number = $security_Social_Number;
 
         return $this;
     }

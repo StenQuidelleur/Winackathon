@@ -1,4 +1,10 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success mt-2">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.name, { 'label': 'Doctor Name'})}}
+    <div class="row">
+        <div class="col">{{ form_row(form.firstname)}}</div>
+        <div class="col">{{ form_row(form.lastname)}}</div>
+    </div>
+    {{ form_row(form.security_social_number)}}
+    {{ form_rest(form)}}
+    <button class="btn btn-info mt-2">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
