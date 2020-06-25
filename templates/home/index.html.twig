@@ -2,21 +2,41 @@
 
 {% block body %}
 
-    <div class="container">
-        <div class="row">
-            <div class="details">
-                <blockquote>
-                    <h5>{{ app.user.firstname }} {{ app.user.lastname }}</h5>
-                    <small><cite title="Source Title">Paris, 75005  <i class="icon-map-marker"></i></cite></small>
-                </blockquote>
-                <p>
-                    {{ app.user.email }}<br>
-                    June 18, 1990
-                </p>
-                <button type="button" class="btn btn-outline-primary"><a href="{{ path('prescription_index')}}">My prescriptions</a></button>
-            </div>
-        </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="texteorange">testettstetetete</pclass>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button type="button" class="btn btn-outline-primary"><a href="{{ path('booking_calendar',{'id' : '1'}) }}">Calendar</a></button>
+
 
 
 {% endblock %}
