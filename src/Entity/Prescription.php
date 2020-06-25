@@ -49,8 +49,14 @@ class Prescription
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $medications;
+
     public function __construct()
     {
+        $this->created_at = new \DateTime('now');
         $this->presMedics = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
@@ -166,6 +172,18 @@ class Prescription
                 $user->setPrescription(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMedications(): ?string
+    {
+        return $this->medications;
+    }
+
+    public function setMedications(string $medications): self
+    {
+        $this->medications = $medications;
 
         return $this;
     }
