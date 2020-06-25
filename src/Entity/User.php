@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,6 +23,16 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=80)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=80)
+     */
+    private $lastname;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -37,10 +49,15 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Prescription::class, inversedBy="users")
+     * @ORM\OneToMany(targetEntity=Prescription::class, mappedBy="user")
      */
-    private $prescription;
-  
+    private $prescriptions;
+
+    public function __construct()
+    {
+        $this->prescriptions = new ArrayCollection();
+    }
+
     public function __toString()
     {
         return (string) $this->getEmail();
@@ -51,6 +68,29 @@ class User implements UserInterface
         return $this->id;
     }
 
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
     public function getEmail(): ?string
     {
         return $this->email;
@@ -124,15 +164,36 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getPrescription(): ?Prescription
+    /**
+     * @return Collection|Prescription[]
+     */
+    public function getPrescriptions(): Collection
     {
-        return $this->prescription;
+        return $this->prescriptions;
     }
 
-    public function setPrescription(?Prescription $prescription): self
+    public function addPrescription(Prescription $prescription): self
     {
-        $this->prescription = $prescription;
+        if (!$this->prescriptions->contains($prescription)) {
+            $this->prescriptions[] = $prescription;
+            $prescription->setUser($this);
+        }
 
         return $this;
     }
+
+    public function removePrescription(Prescription $prescription): self
+    {
+        if ($this->prescriptions->contains($prescription)) {
+            $this->prescriptions->removeElement($prescription);
+            // set the owning side to null (unless already changed)
+            if ($prescription->getUser() === $this) {
+                $prescription->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

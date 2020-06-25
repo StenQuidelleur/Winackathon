@@ -45,14 +45,14 @@ class Prescription
     private $presMedics;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="prescription")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="prescriptions")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $users;
+    private $user;
 
     public function __construct()
     {
         $this->presMedics = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -139,33 +139,14 @@ class Prescription
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function addUser(User $user): self
+    public function setUser(?User $user): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setPrescription($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getPrescription() === $this) {
-                $user->setPrescription(null);
-            }
-        }
+        $this->user = $user;
 
         return $this;
     }
