@@ -3,9 +3,8 @@
 {% block title %}New Prescription{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container mt-5 col-lg-5 col-md-5">
         <h1>Create new Prescription</h1>
         {{ include('prescription/_form.html.twig') }}
-        <a class="btn btn-dark mt-2" href="{{ path('prescription_index') }}">My prescriptions</a>
     </div>
 {% endblock %}

@@ -14,6 +14,9 @@ class PrescriptionType extends AbstractType
         $builder
             ->add('name')
             ->add('medications')
+            ->add('firstname')
+            ->add('lastname')
+            ->add('security_social_number')
             //->add('qrcode')
         ;
     }
