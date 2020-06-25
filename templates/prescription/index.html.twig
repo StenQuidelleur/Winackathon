@@ -1,36 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Prescription index{% endblock %}
+{% block title %}Prescriptions{% endblock %}
 
 {% block body %}
 
-<div class="container">
-    <h1>Prescription</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Doctor</th>
-                    <th>Created_at</th>
-                    <th>Qrcode</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for prescription in prescriptions %}
-                <tr>
-                    <td>{{ prescription.name }}</td>
-                    <td>{{ prescription.createdAt ? prescription.createdAt|date('Y-m-d') : '' }}</td>
-                    <td>{{ prescription.qrcode }}</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-primary"><a href="{{ path('prescription_show', {'id': prescription.id}) }}">SHOW</a></button>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+<div class="container col-sm-12 col-md-6 col-lg-6">
+    <h1 class="text-center mt-5">{{ app.user.firstname }} {{ app.user.lastname }}</h1>
+    <div class="d-flex mt-5">
+        <h3>Prescriptions</h3>
+        <a class="btn btn-warning ml-3" href="">Calendar</a>
     </div>
+    {% for prescription in prescriptions %}
+    <ul class="list-group my-3">
+        <li class="list-group-item"><strong>Doctor: </strong>{{ prescription.name }}</li>
+        <li class="list-group-item"><strong>Date: </strong>{{ prescription.createdAt ? prescription.createdAt|date('Y-m-d') : '' }}</li>
+        {% if prescription.isArchived == false %}
+        <li class="list-group-item"><i class=" btn btn-success far fa-circle"></i></li>
+        {% elseif prescription.isArchived == true %}
+        <li class="list-group-item"><i class="btn btn-danger fas fa-times"></i></li>
+        {% endif %}
+    </ul>
+    <a class="btn btn-info mb-5" href="{{ path('prescription_show', {'id': prescription.id}) }}">SHOW</a>
+    {% endfor %}
+</div>
 {% endblock %}

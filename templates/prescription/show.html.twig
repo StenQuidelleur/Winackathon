@@ -3,26 +3,26 @@
 {% block title %}Prescription{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>Prescription</h1>
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Doctor</th>
-                    <td>{{ prescription.name }}</td>
-                </tr>
-                <tr>
-                    <th>Created_at</th>
-                    <td>{{ prescription.createdAt ? prescription.createdAt|date('Y-m-d') : '' }}</td>
-                </tr>
-                <tr>
-                    <th>Qrcode</th>
-                    <td>{{ prescription.qrcode }}</td>
-                </tr>
-                <tr>
-                    <th>Medications</th>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container col-sm-12 col-md-6 col-lg-6">
+        <h1 class="text-center my-5">Prescription</h1>
+        <div class="d-flex">
+            <ul class="list-group list-group-flush mt-4 mr-5">
+                <li class="list-group-item"><strong>Date: </strong> {{ prescription.createdAt ? prescription.createdAt|date('Y-m-d') : '' }}</li>
+                <li class="list-group-item"><strong>Patient: </strong> {{ prescription.firstname }} {{ prescription.lastname }}</li>
+                <li class="list-group-item"><strong>Medications: </strong><br>{{ prescription.medications | nl2br}}</li>
+                <li class="list-group-item"><strong>Doctor: </strong> {{ prescription.name }}</li>
+            </ul>
+            <div class="ml-5">
+                <img src="https://www.tutsmake.com/wp-content/uploads/2019/02/simple-qr-code-image.png" alt="">
+            </div>
+        </div>
+        <div class="d-flex mt-5">
+            {% if prescription.isArchived == false %}
+            <a class="btn btn-success mr-4" href="{{ path('pharma') }}">Pharmacy</a>
+            <a class="btn btn-success" href="{{ path('drone') }}">Drone</a>
+            {% elseif prescription.isArchived == true %}
+            <a class="btn btn-dark my-3" href="{{ path('prescription_index') }}">Back</a>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

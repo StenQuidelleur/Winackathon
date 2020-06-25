@@ -2,11 +2,11 @@
     {% if app.user %}
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="navbar-brand logo" href="{{ path('home_index') }}">Go-Pharma</a>
+            <a class="navbar-brand logo ml-3" href="{{ path('prescription_index') }}">Go-Pharma</a>
         </li>
     </ul>
-    <a class="btn btn-sm btn-danger right" href="{{ path('app_logout') }}"><i class="fas fa-sm fa-sign-out-alt"></i></a>
+    <a class="btn btn-sm btn-danger right mr-3" href="{{ path('app_logout') }}"><i class="fas fa-sm fa-sign-out-alt"></i></a>
     {% else %}
-    <a class="navbar-brand logo" href="{{ path('home_index') }}">Go-Pharma</a>
+    <a class="navbar-brand logo ml-3" href="{{ path('prescription_index') }}">Go-Pharma</a>
     {% endif %}
 </nav>
