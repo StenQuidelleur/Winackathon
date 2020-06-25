@@ -39,7 +39,7 @@ class BookingController extends AbstractController
             $entityManager->persist($booking);
             $entityManager->flush();
 
-            return $this->redirectToRoute('booking_index');
+            return $this->redirectToRoute('booking_calendar',['id'=>1]);
         }
 
         return $this->render('booking/new.html.twig', [
@@ -69,7 +69,7 @@ class BookingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('booking_index');
+            return $this->redirectToRoute('booking_calendar',['id'=>1]);
         }
 
         return $this->render('booking/edit.html.twig', [
@@ -89,7 +89,7 @@ class BookingController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('booking_index');
+        return $this->redirectToRoute('booking_calendar',['id'=>1]);
     }
     /**
      * @Route("/calendar/{id}", name="booking_calendar", methods={"GET"})

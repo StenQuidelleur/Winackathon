@@ -37,4 +37,4 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: /prescription/new, roles: ROLE_DOCTOR }
-         - { path: ^/user , roles: ROLE_PATIENT }
+         - { path: ^/prescription , roles: ROLE_PATIENT }
