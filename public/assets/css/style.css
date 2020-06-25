@@ -1,11 +1,6 @@
-/*body,
-html {
-   height: 100%;
-}
-
 body {
-   background: #2f2f2f;
-} */
+    font-family: 'Varela Round', sans-serif;
+}
 
 .pin {
     width: 30px;
@@ -387,4 +382,8 @@ body {
 .logo {
     font-family: 'Pacifico', cursive;
     font-size: 25px;
+}
+
+.pitch {
+    font-size: 30px;
 }

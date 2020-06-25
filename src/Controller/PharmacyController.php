@@ -29,6 +29,8 @@ class PharmacyController extends AbstractController
      */
     public function direction()
     {
+        $this->addFlash('success', 'Your prescription has been validated by the pharmacy, you can come and get it there! ');
+
         return $this->render('pharma/direction.html.twig');
     }
 
