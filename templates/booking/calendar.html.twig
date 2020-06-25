@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('booking_new') }}">Create new booking</a>
-
-    <div id="calendar-holder"></div>
+    <div class="container ">
+        <div id="calendar-holder"></div>
+        <a class="btn btn-primary mt-3 mb-3" href="{{ path('booking_new') }}">Create Event</a>
+    </div>
 {% endblock %}
 
 {% block stylesheets %}

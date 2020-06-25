@@ -7,7 +7,7 @@
     <h1 class="text-center mt-5">{{ app.user.firstname }} {{ app.user.lastname }}</h1>
     <div class="d-flex mt-5">
         <h3>Prescriptions</h3>
-        <a class="btn btn-warning ml-3" href="">Calendar</a>
+        <a class="btn btn-warning ml-3" href="{{ path('booking_calendar',{'id' : '1'}) }}">Calendar</a>
     </div>
     {% for prescription in prescriptions %}
     <ul class="list-group my-3">
