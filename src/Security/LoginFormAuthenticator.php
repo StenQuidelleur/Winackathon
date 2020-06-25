@@ -108,7 +108,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
                     return new RedirectResponse($this->urlGenerator->generate('prescription_new'));
 
                 } elseif ($role === "ROLE_PATIENT") {
-                    return new RedirectResponse($this->urlGenerator->generate('_home'));
+                    return new RedirectResponse($this->urlGenerator->generate('home_index'));
 
                 }
             }
