@@ -3,11 +3,9 @@
 {% block title %}New Booking{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>Create Event</h1>
-
+    <div class="container mt-5 col-sm-12 col-md-5 col-md-5">
+        <h1 class="text-center mb-5">Create Event</h1>
         {{ include('booking/_form.html.twig') }}
-
-        <a class="btn btn-primary" href="{{ path('booking_calendar',{'id' : '1'}) }}">Calendar</a>
+        <a class="btn btn-warning" href="{{ path('booking_calendar',{'id' : '1'}) }}">Calendar</a>
     </div>
 {% endblock %}

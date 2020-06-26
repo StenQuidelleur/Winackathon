@@ -5,7 +5,8 @@
 {% block body %}
     <div class="container col-sm-12 col-md-6 col-lg-6">
         <h1 class="text-center my-5">Prescription</h1>
-        <div class="d-flex">
+        <a class="btn btn-dark my-3" href="{{ path('prescription_index') }}">Back</a>
+        <div class="d-md-flex d-lg-flex">
             <ul class="list-group list-group-flush mt-4 mr-5">
                 <li class="list-group-item"><strong>Date: </strong> {{ prescription.createdAt ? prescription.createdAt|date('Y-m-d') : '' }}</li>
                 <li class="list-group-item"><strong>Patient: </strong> {{ prescription.firstname }} {{ prescription.lastname }}</li>
@@ -16,7 +17,7 @@
                 <img src="https://www.tutsmake.com/wp-content/uploads/2019/02/simple-qr-code-image.png" alt="">
             </div>
         </div>
-        <div class="d-flex mt-5">
+        <div class="d-flex my-5">
             {% if prescription.isArchived == false %}
             <a class="btn btn-success mr-4" href="{{ path('pharma') }}">Pharmacy</a>
             <a class="btn btn-success" href="{{ path('drone') }}">Drone</a>

@@ -2,7 +2,11 @@
     {% if app.user %}
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
+            {% if app.user.roles[0] == "ROLE_DOCTOR" %}
+            <a class="navbar-brand logo ml-3" href="#">Go-Pharma</a>
+            {% elseif app.user.roles[0] == "ROLE_PATIENT" %}
             <a class="navbar-brand logo ml-3" href="{{ path('prescription_index') }}">Go-Pharma</a>
+            {% endif %}
         </li>
     </ul>
     <a class="btn btn-sm btn-danger right mr-3" href="{{ path('app_logout') }}"><i class="fas fa-sm fa-sign-out-alt"></i></a>

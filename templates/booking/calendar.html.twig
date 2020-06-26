@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container ">
+    <div class="container mt-5">
         <div id="calendar-holder"></div>
         <a class="btn btn-primary mt-3 mb-3" href="{{ path('booking_new') }}">Create Event</a>
+        <a class="btn btn-dark my-3" href="{{ path('prescription_index') }}">Back</a>
     </div>
 {% endblock %}
 
